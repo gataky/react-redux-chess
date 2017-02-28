@@ -1,0 +1,19 @@
+.display {
+    position: relative;
+    height: 100vh;
+    box-sizing: border-box;
+    background: lightgreen;
+}
+
+.chessboard-layout {
+    background: green;
+    /*margin: 0 auto;*/
+    box-shadow: 0px 0px 116px -17px black;
+
+    position: absolute;
+    height: 500px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 10px solid black;
+    border-radius: 10px;
+}
