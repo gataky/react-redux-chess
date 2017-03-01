@@ -17,7 +17,9 @@ Screenshots
 ---
 
 The initial starting position
+
 ![initial](https://github.com/sir-wiggles/react-redux-chess/blob/master/screenshots/start.png)
 
 When a pawn is up for promotion a dialog show up allowing the user to select the promotion type
+
 ![promotion](https://github.com/sir-wiggles/react-redux-chess/blob/master/screenshots/promotion.png)
