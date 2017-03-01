@@ -4,7 +4,7 @@ import events from './constants.js';
 
 let init = fromJS({
     coordinates: true,       // weather or not to show coordinates
-    orientation: 'white',    // orientation of the board from players perspective 
+    orientation: true,       // orientation of the board from players perspective (true = white)
     promotion  : null,       // will hold information on pieces to be promoted 
     draggable  : true,       // if pieces are draggable
     size       : 500,        // size of the board for both height and width

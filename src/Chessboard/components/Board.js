@@ -21,7 +21,7 @@ const Board = React.createClass({
         engine.load(this.props.fen);
         board = engine.board();
 
-        let o = this.props.orientation === 'white';
+        let o = this.props.orientation;
         for (
                 let row = o ? 0 : 7; 
                 o ? row < 8 : row >= 0; 

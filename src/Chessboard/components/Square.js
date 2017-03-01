@@ -22,7 +22,9 @@ const Square = React.createClass({
 
         let letter = this.props.coordinate[0];
         let number = this.props.coordinate[1];
-        let corner = squaresWithCoordinates[this.props.orientation][this.props.coordinate];
+        let corner = squaresWithCoordinates[
+            this.props.orientation ? 'white' : 'black'
+        ][this.props.coordinate];
 
         if (corner === 'n') {
             letter = '';
