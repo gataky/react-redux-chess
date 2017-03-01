@@ -1,9 +1,8 @@
-import React from 'react';
+import React       from 'react';
 import { connect } from 'react-redux';
-
-import Square from './Square.js';
-import Piece from './Piece.js';
-import {Promote} from '../actions.js';
+import Square      from './Square.js';
+import Piece       from './Piece.js';
+import {Promote}   from '../actions.js';
 
 const Promotion = React.createClass({
 
@@ -21,15 +20,8 @@ const Promotion = React.createClass({
     },
 
     renderSquare: function(index, piece) {
-        let style = {
-            height: '50%',
-            width : '50%',
-        }
-
-        console.log(index, piece);
-
         return (
-            <div style={style} key={index}>
+            <div style={{ height: '50%', width: '50%' }} key={index}>
                 <Square index={index} coordinate={'xx'} draggable={false}>
                     {this.renderPiece(piece)}
                 </Square>
@@ -46,20 +38,19 @@ const Promotion = React.createClass({
     },
 
     render: function() {
-        let style2 = {
-            display: 'flex',
-            flexWrap: 'wrap',
-
-            position: 'relative',
-            margin  : '0 auto',
-            height  : '125px',
-            width   : '125px',
-            border  : '8px solid black',
+        let style = {
+            display     : 'flex',
+            flexWrap    : 'wrap',
+            position    : 'relative',
+            margin      : '0 auto',
+            height      : '125px',
+            width       : '125px',
+            border      : '8px solid black',
             borderRadius: '5px',
-            boxShadow: '3px 3px 10px grey',
+            //boxShadow   : '3px 3px 10px grey',
         }
         return (
-                <div style={style2}>
+                <div style={style}>
                     {this.renderSquares()}
                 </div>
         )

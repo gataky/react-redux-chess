@@ -1,11 +1,8 @@
-import React                   from 'react';
-import { connect }             from 'react-redux';
-
-import Square          from './components/Square.js';
-import Piece           from './components/Piece.js';
-import engine          from './utils/engine.js';
-
-import './ChessBoard.css';
+import React       from 'react';
+import { connect } from 'react-redux';
+import Square      from './Square.js';
+import Piece       from './Piece.js';
+import engine      from '../utils/engine.js';
 
 const Board = React.createClass({
 
@@ -21,12 +18,7 @@ const Board = React.createClass({
 
     renderSquares: function() {
         let squares = [];
-        let piece, 
-            number, 
-            letter, 
-            board, 
-            coordinate, 
-            index;
+        let piece, number, letter, board, coordinate, index;
 
         engine.load(this.props.fen);
         board = engine.board();
@@ -70,31 +62,14 @@ const Board = React.createClass({
 
     renderPiece: function(coordinate, piece) {
         if (piece) {
-            return <Piece type={piece} coordinate={coordinate} moves={this.moves} draggable={true}/>;
+            return <Piece type={piece} coordinate={coordinate} draggable={true}/>;
         }
-    },
-
-    // TODO: move you to piece?
-    moves: function(coordinate) {
-        let squares = engine.moves({
-            square : coordinate,
-            verbose: true,
-        });
-        squares = squares.map(square => { return square.to });
-        return squares;
     },
 
     render: function() {
         let squares = this.renderSquares(this.renderSquares());
-
-        let style = {
-            width   : '500px',
-            height  : '500px',
-            position: 'relative',
-        }
-
         return (
-            <div className="chessboard-board-layout" style={style}>
+            <div className="chessboard-board-layout" style={{ width: '500px', height: '500px', position: 'relative' }}>
                 {squares}
             </div>
         );
@@ -110,5 +85,5 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Board)
+export default connect(mapStateToProps)(Board);
 

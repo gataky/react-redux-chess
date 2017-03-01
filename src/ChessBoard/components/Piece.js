@@ -3,6 +3,7 @@ import { DragSource }    from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { connect }       from 'react-redux';
 import { ItemTypes }     from '../utils/Constants.js';
+import engine            from '../utils/engine.js';
 
 const Piece = React.createClass({
 
@@ -27,10 +28,19 @@ const pieceSource = {
         return {
             coordinate: props.coordinate,
             type      : props.type,
-            moves     : props.moves(props.coordinate),
+            moves     : validMoves(props.coordinate),
         };
     },
-};
+}
+
+function validMoves (coordinate) {
+    let squares = engine.moves({
+        square : coordinate,
+        verbose: true,
+    });
+    squares = squares.map(square => { return square.to });
+    return squares;
+}
 
 function collect(connect, monitor) {
     return {

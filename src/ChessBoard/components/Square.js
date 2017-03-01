@@ -1,18 +1,12 @@
 import React          from 'react';
 import { DropTarget } from 'react-dnd';
 import { connect }    from 'react-redux';
-
-import { Move } from '../actions.js';
-
+import { Move }       from '../actions.js';
+import { Colors }     from '../utils/Defaults.js';
 import { 
     ItemTypes,
     SquaresWithCoordinates,
 } from '../utils/Constants.js';
-
-import {
-    Colors
-} from '../utils/Defaults.js';
-
 
 const Square = React.createClass({
     renderOverlay: function(shade) {
@@ -27,25 +21,21 @@ const Square = React.createClass({
 
         let letter = this.props.coordinate[0];
         let number = this.props.coordinate[1];
+        let corner = SquaresWithCoordinates[this.props.orientation][this.props.coordinate];
 
-        switch(SquaresWithCoordinates[this.props.orientation][this.props.coordinate]) {
-            case 'n':
-                letter = '';
-                break;
-            case 'l':
-                number = '';
-                break;
-            case 'b': 
-                break;
-            default: 
-                return;
+        if (corner === 'n') {
+            letter = '';
+        } else if (corner === 'l') {
+            number = '';
+        }  else if (corner === undefined) {
+            return 
         }
 
         let s = {color: isBlackSquare ? Colors.Primary.light : Colors.Primary.dark};
         return (
             <div>
-                <div className="chessboard-coordinate-ul" style={s}>{number}</div>
-                <div className="chessboard-coordinate-br" style={s}>{letter}</div>
+                {!!number ? <div className="chessboard-coordinate-ul" style={s}>{number}</div> : null }
+                {!!letter ? <div className="chessboard-coordinate-br" style={s}>{letter}</div> : null }
             </div>
         )
     },

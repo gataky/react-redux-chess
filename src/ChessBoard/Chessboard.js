@@ -1,15 +1,14 @@
 import React                   from 'react';
-//import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import AnimateOnChange         from 'react-animate-on-change';
 import { DragDropContext }     from 'react-dnd';
 import HTML5Backend            from 'react-dnd-html5-backend';
 import { connect }             from 'react-redux';
 
-import Board           from './Board.js';
+import Board           from './components/Board.js';
 import CustomDragLayer from './components/CustomDragLayer.js';
 import Promotion       from './components/Promotion.js';
 
-import './ChessBoard.css';
+import './Chessboard.css';
 
 const Chessboard = React.createClass({
     getInitialState: function() {
