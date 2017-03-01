@@ -1,14 +1,14 @@
 import React                   from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import AnimateOnChange         from 'react-animate-on-change';
-import { DragDropContext }     from 'react-dnd';
-import HTML5Backend            from 'react-dnd-html5-backend';
+//import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+//import AnimateOnChange         from 'react-animate-on-change';
+//import { DragDropContext }     from 'react-dnd';
+//import HTML5Backend            from 'react-dnd-html5-backend';
 import { connect }             from 'react-redux';
 
 import Square          from './components/Square.js';
 import Piece           from './components/Piece.js';
-import CustomDragLayer from './components/CustomDragLayer.js';
-import Promotion       from './components/Promotion.js';
+//import CustomDragLayer from './components/CustomDragLayer.js';
+//import Promotion       from './components/Promotion.js';
 import engine          from './utils/engine.js';
 
 import './ChessBoard.css';
@@ -65,13 +65,8 @@ const Board = React.createClass({
     },
 
     renderSquare: function(index, coordinate, piece) {
-        let style = {
-            height: '12.5%',
-            width : '12.5%',
-        }
-
         return (
-            <div style={style} key={index}>
+            <div style={{ height: '12.5%', width : '12.5%' }} key={index}>
                 <Square index={index} coordinate={coordinate} >
                     {this.renderPiece(coordinate, piece)}
                 </Square>
@@ -85,15 +80,6 @@ const Board = React.createClass({
         }
     },
 
-    promote: function(item) {
-        this.promotionMove.promotion = item[1];
-        this.chess.move(this.promotionMove);
-        this.setState({
-            promotionActive:false,
-            fen: this.chess.fen(),
-        })
-    },
-
     moves: function(coordinate) {
         let squares = engine.moves({
             square : coordinate,
@@ -101,24 +87,6 @@ const Board = React.createClass({
         });
         squares = squares.map(square => { return square.to });
         return squares;
-    },
-
-    move: function(from, to) {
-        let piece = engine.get(from);
-        if ((piece.type === 'p' && piece.color === 'w' && to[1] === '8') ||
-            (piece.type === 'p' && piece.color === 'b' && to[1] === '1')) {
-            this.promotionMove = {from, to};
-            this.setState({promotionActive: true});
-            return 
-        }
-            
-        engine.move({
-            from: from,
-            to  : to,
-            promotion: 'q',
-        })
-        this.setState({fen: engine.fen()});
-        console.info(`FEN move ${from}->${to}`, engine.fen());
     },
 
     render: function() {
@@ -130,31 +98,18 @@ const Board = React.createClass({
             position: 'relative',
         }
 
+        //<AnimateOnChange
+            //baseClassName="board"
+            //animationClassName="board-fade"
+            //animate={this.props.promotion ? true : false}>
+                //<div className="chessboard-board-layout">
+                    //{squares}
+                    //<CustomDragLayer/>
+                //</div>
+        //</AnimateOnChange>
         return (
-            <div className="chessboard-layout" style={style}>
-
-                <AnimateOnChange
-                    baseClassName="board"
-                    animationClassName="board-fade"
-                    animate={this.props.promotion ? true : false}>
-                        <div className="chessboard-board-layout">
-                            {squares}
-                        </div>
-                </AnimateOnChange>
-
-                <CustomDragLayer/>
-
-                <ReactCSSTransitionGroup 
-                     transitionName="promotion"
-                     transitionEnterTimeout={1}
-                     transitionLeaveTimeout={1}>
-                        {this.props.promotion ? (
-                            <div className="chessboard-promotion-layout">
-                                <Promotion/>
-                            </div>
-                        ) : null}
-                </ReactCSSTransitionGroup>
-
+            <div className="chessboard-board-layout" style={style}>
+                {squares}
             </div>
         );
     }
@@ -169,7 +124,5 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(
-        DragDropContext(HTML5Backend)(Board)
-);
+export default connect(mapStateToProps)(Board)
 

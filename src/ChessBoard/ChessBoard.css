@@ -6,17 +6,23 @@ body {
     font-family: 'ubuntu', 'Ceviche One', sans-serif;
 }
 
-.board {
-    opacity: 1;
+
+.chessboard-board-layout-fade-out{
+    animation: chessboard-board-layout-keyframes-fade-out .5s ease-in 0s 1 normal forwards;
 }
 
-.board-fade{
-    animation: board-keyframes-fade .3s ease-out 0s 1 normal forwards;
+.chessboard-board-layout-fade-in{
+    animation: chessboard-board-layout-keyframes-fade-in .5s ease-out 0s 1 normal forwards;
 }
 
-@keyframes board-keyframes-fade {
+@keyframes chessboard-board-layout-keyframes-fade-out {
     0%   { opacity:  1 }
     100% { opacity: .4 }
+}
+
+@keyframes chessboard-board-layout-keyframes-fade-in {
+    0%   { opacity: .4 }
+    100% { opacity:  1 }
 }
 
 
@@ -30,22 +36,22 @@ body {
     opacity: 1;
 }
 
-.promotion-leave{
-    opacity: 1;
-    transition: opacity 1s ease-out;
-    -webkit-transition: opacity 1s ease-out;
-}
+/*.promotion-leave{*/
+    /*opacity: 1;*/
+    /*transition: opacity 1s ease-out;*/
+    /*-webkit-transition: opacity 1s ease-out;*/
+/*}*/
 
-.promotion-leave.promotion-leave-active {
-    opacity: 0.01;
-}
+/*.promotion-leave.promotion-leave-active {*/
+    /*opacity: 0.01;*/
+/*}*/
 
 .chessboard-target-overlay {
     position: absolute;
-    height: 100%;
     width: 100%;
+    height: 100%;
     z-index: 1;
-    opacity: 0.4;
+    opacity: 0.6;
     background: yellow;
 }
 
@@ -65,52 +71,45 @@ body {
 
 .chessboard-square-layout {
     position: relative;
-    height: 100%;
     width: 100%;
+    height: 100%;
     user-select: none;
 }
 
 .chessboard-piece-layout {
     position: absolute;
-    cursor: move;
-    height: 100%;
     width: 100%;
+    height: 100%;
     z-index: 0;
+    cursor: move;
     user-select: none;
 }
 
 .chessboard-drag-layout {
-    /*position: fixed;*/
-    /*pointer-events: none;*/
-    /*z-index: 1;*/
-    /*left: 0;*/
-    /*top: 0;*/
-    /*width: 100%;*/
-    /*height: 100%;*/
-
-    position: absolute;
-    pointer-events: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
     z-index: 1;
-    margin: 0;
-    transform: none;
-    /*width: 100%;*/
-    /*height: 100%;*/
+    pointer-events: none;
 }
 
 .chessboard-promotion-layout {
-    width: 100%;
-    height: 100%;
+    position: absolute;
     display: flex;
     flex-wrap: wrap;
-    position: absolute;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
+    top: 0;
     justify-content: center;
 }
 
 .chessboard-board-layout {
-    width: 100%;
-    height: 100%;
+    position: absolute;
     display: flex;
     flex-wrap: wrap;
-    position: absolute;
+    width: 100%;
+    height: 100%;
 }

@@ -4,24 +4,26 @@ import { ItemTypes } from '../utils/Constants.js';
 
 
 function getItemStyles(props) {
-  const { initialOffset, currentOffset, clientOffset } = props;
-  if (!initialOffset || !currentOffset) {
+    const { initialOffset, currentOffset } = props;
+    if (!initialOffset || !currentOffset) {
+        return {
+            display: 'none',
+        };
+    }
+
+    //console.log('initialOffset', props.initialOffset);
+    //console.log('currentOffset', props.currentOffset);
+    //console.log('clientOffset ', props.clientOffset);
+
+    let { x, y } = currentOffset;
+
+    const transform = `translate(${x}px, ${y}px)`;
     return {
-      display: 'none',
+        position: 'absolute',
+        zIndex: 2,
+        transform,
+        WebkitTransform: transform,
     };
-  }
-
-  console.log('initialOffset', props.initialOffset);
-  console.log('currentOffset', props.currentOffset);
-  console.log('clientOffset ', props.clientOffset);
-
-  let { x, y } = currentOffset;
-
-  const transform = `translate(${x}px, ${y}px)`;
-  return {
-    transform,
-    WebkitTransform: transform,
-  };
 }
 
 const CustomDragLayer = React.createClass({
@@ -41,7 +43,6 @@ const CustomDragLayer = React.createClass({
             return null;
         } 
 
-
         return (
             <div className='chessboard-drag-layout'>
                 {this.renderItem(this.props.itemType, this.props.item)}
@@ -52,12 +53,12 @@ const CustomDragLayer = React.createClass({
 
 function collect(monitor) {
     return {
-        item: monitor.getItem(),
-        itemType: monitor.getItemType(),
+        item         : monitor.getItem(),
+        itemType     : monitor.getItemType(),
         initialOffset: monitor.getInitialSourceClientOffset(),
         currentOffset: monitor.getSourceClientOffset(),
-        clientOffset: monitor.getSourceClientOffset(),
-        isDragging: monitor.isDragging(),
+        clientOffset : monitor.getSourceClientOffset(),
+        isDragging   : monitor.isDragging(),
     }
 }
 export default DragLayer(collect)(CustomDragLayer);

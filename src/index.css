@@ -2,18 +2,18 @@
     position: relative;
     height: 100vh;
     box-sizing: border-box;
-    background: lightgreen;
+    background: #406740;
 }
 
-.chessboard-layout {
+.chessboard {
     background: green;
-    /*margin: 0 auto;*/
-    box-shadow: 0px 0px 116px -17px black;
+    margin: 0 auto;
+    box-shadow: 0px 0px 116px -17px #6cbbd8;
 
-    position: absolute;
+    position: relative;
     height: 500px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 25%;
+    /*transform: translateY(-50%); why the fuck can't I use you?*/
     border: 10px solid black;
     border-radius: 10px;
 }
