@@ -6,8 +6,9 @@ let init = fromJS({
     coordinates: true,        // weather or not to show coordinates
     orientation: 'white',     // orientation of the board from players perspective 
     promotion  : false,        // will hold information on pieces to be promoted 
-    fen        : 'rnbqkbn1/pppppppP/8/8/8/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1',
+    fen        : 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
     draggable  : true,       // if pieces are draggable
+    size       : 500,        // size of the board for both height and width
 });
 
 function reducer(state=init, action) {
@@ -23,6 +24,15 @@ function reducer(state=init, action) {
 
         case events.CHESSBOARD_SELECT_PROMOTION:
             return state.set('promotion', action.directions);
+
+        case events.FLIP_ORIENTATION:
+            return state.set('orientation', action.color);
+
+        case events.SHOW_COORDINATES:
+            return state.set('coordinates', action.state);
+
+        case events.SET_FEN:
+            return state.set('fen', action.fen);
 
         default:
             break;

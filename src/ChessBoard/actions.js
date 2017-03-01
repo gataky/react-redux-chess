@@ -1,3 +1,6 @@
+export const SET_FEN                       = 'SET_FEN';
+export const FLIP_ORIENTATION              = 'FLIP_ORIENTATION';
+export const SHOW_COORDINATES              = 'SHOW_COORDINATES';
 export const CHESSBOARD_PIECE_MOVE         = 'CHESSBOARD_PIECE_MOVE';
 export const CHESSBOARD_SELECT_PROMOTION   = 'CHESSBOARD_SELECT_PROMOTION';
 
@@ -32,3 +35,14 @@ export function Move(directions) {
     }
 }
 
+export function Orientation(color) {
+    return {type: FLIP_ORIENTATION, color}
+}
+
+export function Coordinates(state) {
+    return {type: SHOW_COORDINATES, state}
+}
+
+export function SetFEN(fen) {
+    return {type: SET_FEN, fen};
+}

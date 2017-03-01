@@ -59,7 +59,7 @@ const Promotion = React.createClass({
 
 function mapStateToProps(state) {
     return {
-        promotion: state.ChessBoard.get('promotion'),
+        promotion: state.Chessboard.get('promotion'),
     }
 }
 

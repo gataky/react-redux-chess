@@ -52,7 +52,7 @@ function collect(connect, monitor) {
 
 function mapStateToProps(state) {
     return {
-        draggable: state.ChessBoard.get('draggable'),
+        draggable: state.Chessboard.get('draggable'),
     }
 }
 

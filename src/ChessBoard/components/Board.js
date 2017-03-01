@@ -8,10 +8,8 @@ const Board = React.createClass({
 
     getInitialState: function() {
         let success = engine.load(this.props.fen);
-        if (success) {
-            console.info("FEN load success", this.props.fen);
-        } else {
-            console.error("FEN load failed", this.props.fen);
+        if (!success) {
+            console.error(engine.validate(this.props.fen));
         }
         return {};
     },
@@ -69,7 +67,7 @@ const Board = React.createClass({
     render: function() {
         let squares = this.renderSquares(this.renderSquares());
         return (
-            <div className="chessboard-board-layout" style={{ width: '500px', height: '500px', position: 'relative' }}>
+            <div className="chessboard-board-layout" >
                 {squares}
             </div>
         );
@@ -78,10 +76,10 @@ const Board = React.createClass({
 
 function mapStateToProps(state) {
     return {
-        coordinates: state.ChessBoard.get('coordinates'),
-        orientation: state.ChessBoard.get('orientation'),
-        promotion  : state.ChessBoard.get('promotion'),
-        fen        : state.ChessBoard.get('fen'),
+        coordinates: state.Chessboard.get('coordinates'),
+        orientation: state.Chessboard.get('orientation'),
+        promotion  : state.Chessboard.get('promotion'),
+        fen        : state.Chessboard.get('fen'),
     };
 }
 

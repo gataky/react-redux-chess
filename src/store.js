@@ -8,10 +8,10 @@ import Immutable    from 'immutable';
 import thunk        from 'redux-thunk';
 import createLogger from 'redux-logger';
 //import DevTools     from './components/DevTools';
-import * as ChessBoardReducers   from "./ChessBoard/reducer.js";
+import * as ChessboardReducers   from "./ChessBoard/reducer.js";
 
 const rootReducer = combineReducers({
-    ChessBoard: ChessBoardReducers.default,
+    Chessboard: ChessboardReducers.default,
 })
 
 const logger = createLogger({ stateTransformer: (state) => {

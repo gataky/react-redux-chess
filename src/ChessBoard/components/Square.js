@@ -89,9 +89,9 @@ function collect(connect, monitor) {
 
 function mapStateToProps(state) {
     return {
-        coordinates: state.ChessBoard.get("coordinates"),
-        orientation: state.ChessBoard.get("orientation"),
-        promotion  : state.ChessBoard.get('promotion'),
+        coordinates: state.Chessboard.get("coordinates"),
+        orientation: state.Chessboard.get("orientation"),
+        promotion  : state.Chessboard.get('promotion'),
     }
 }
 

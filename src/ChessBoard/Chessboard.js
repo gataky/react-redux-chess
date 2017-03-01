@@ -2,6 +2,7 @@ import React                   from 'react';
 import AnimateOnChange         from 'react-animate-on-change';
 import { DragDropContext }     from 'react-dnd';
 import HTML5Backend            from 'react-dnd-html5-backend';
+import TouchBackend            from 'react-dnd-touch-backend';
 import { connect }             from 'react-redux';
 
 import Board           from './components/Board.js';
@@ -21,10 +22,9 @@ const Chessboard = React.createClass({
     },
 
     render: function() {
-
         let style = {
-            width   : '500px',
-            height  : '500px',
+            width   : `${this.props.size}px`,
+            height  : `${this.props.size}px`,
             position: 'relative',
         }
 
@@ -59,11 +59,18 @@ const Chessboard = React.createClass({
 
 function mapStateToProps(state) {
     return {
-        promotion  : state.ChessBoard.get('promotion'),
+        promotion  : state.Chessboard.get('promotion'),
+        size       : state.Chessboard.get('size'),
     };
 }
 
+function is_touch_device() {
+  return !!('ontouchstart' in window || navigator.maxTouchPoints);
+};
+
+let backend = is_touch_device() ? TouchBackend : HTML5Backend;
+
 export default connect(mapStateToProps)(
-        DragDropContext(HTML5Backend)(Chessboard)
+        DragDropContext(backend)(Chessboard)
 );
 
