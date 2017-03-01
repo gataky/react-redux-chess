@@ -8,7 +8,7 @@ let init = fromJS({
     promotion  : null,       // will hold information on pieces to be promoted 
     draggable  : true,       // if pieces are draggable
     size       : 500,        // size of the board for both height and width
-    fen        : 'rnbqkbnr/pppppppP/8/8/8/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1',
+    fen        : 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
 });
 
 function reducer(state=init, action) {
