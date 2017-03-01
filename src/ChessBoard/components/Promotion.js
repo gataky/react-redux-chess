@@ -26,9 +26,11 @@ const Promotion = React.createClass({
             width : '50%',
         }
 
+        console.log(index, piece);
+
         return (
             <div style={style} key={index}>
-                <Square index={index} draggable={false}>
+                <Square index={index} coordinate={'xx'} draggable={false}>
                     {this.renderPiece(piece)}
                 </Square>
             </div>

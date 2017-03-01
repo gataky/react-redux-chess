@@ -1,9 +1,8 @@
 import React          from 'react';
 import { DropTarget } from 'react-dnd';
 import { connect }    from 'react-redux';
-import {
-    Move,
-} from '../actions.js';
+
+import { Move } from '../actions.js';
 
 import { 
     ItemTypes,
@@ -22,7 +21,7 @@ const Square = React.createClass({
     },
 
     renderCoordinate: function(isBlackSquare) {
-        if (!this.props.coordinates || this.props.promotion) {
+        if (!this.props.coordinates) {
             return null;
         }
 

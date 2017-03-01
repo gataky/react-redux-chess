@@ -18,7 +18,6 @@ const Chessboard = React.createClass({
     },
 
     componentWillUpdate: function() {
-        console.log("here");
         this.pp = this.p;
     },
 
@@ -35,7 +34,6 @@ const Chessboard = React.createClass({
         if (this.p === false && this.pp === true) {
             direction = 'in';
         } 
-        console.log('===', direction, !!this.props.promotion || this.pp);
         
         return (
             <div className="chessboard" style={style}>

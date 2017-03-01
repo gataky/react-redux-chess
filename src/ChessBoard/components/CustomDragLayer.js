@@ -10,11 +10,6 @@ function getItemStyles(props) {
             display: 'none',
         };
     }
-
-    //console.log('initialOffset', props.initialOffset);
-    //console.log('currentOffset', props.currentOffset);
-    //console.log('clientOffset ', props.clientOffset);
-
     let { x, y } = currentOffset;
 
     const transform = `translate(${x}px, ${y}px)`;

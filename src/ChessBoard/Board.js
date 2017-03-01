@@ -1,14 +1,8 @@
 import React                   from 'react';
-//import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-//import AnimateOnChange         from 'react-animate-on-change';
-//import { DragDropContext }     from 'react-dnd';
-//import HTML5Backend            from 'react-dnd-html5-backend';
 import { connect }             from 'react-redux';
 
 import Square          from './components/Square.js';
 import Piece           from './components/Piece.js';
-//import CustomDragLayer from './components/CustomDragLayer.js';
-//import Promotion       from './components/Promotion.js';
 import engine          from './utils/engine.js';
 
 import './ChessBoard.css';
@@ -80,6 +74,7 @@ const Board = React.createClass({
         }
     },
 
+    // TODO: move you to piece?
     moves: function(coordinate) {
         let squares = engine.moves({
             square : coordinate,
@@ -98,15 +93,6 @@ const Board = React.createClass({
             position: 'relative',
         }
 
-        //<AnimateOnChange
-            //baseClassName="board"
-            //animationClassName="board-fade"
-            //animate={this.props.promotion ? true : false}>
-                //<div className="chessboard-board-layout">
-                    //{squares}
-                    //<CustomDragLayer/>
-                //</div>
-        //</AnimateOnChange>
         return (
             <div className="chessboard-board-layout" style={style}>
                 {squares}
