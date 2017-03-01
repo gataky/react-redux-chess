@@ -2,7 +2,7 @@ import React             from 'react';
 import { DragSource }    from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { connect }       from 'react-redux';
-import { ItemTypes }     from '../utils/Constants.js';
+import { itemTypes }     from '../constants.js';
 import engine            from '../utils/engine.js';
 
 const Piece = React.createClass({
@@ -56,6 +56,6 @@ function mapStateToProps(state) {
     }
 }
 
-export default DragSource(ItemTypes.PIECE, pieceSource, collect)(
+export default DragSource(itemTypes.PIECE, pieceSource, collect)(
     connect(mapStateToProps)(Piece)
 );

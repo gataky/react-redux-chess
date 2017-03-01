@@ -1,9 +1,22 @@
-const ItemTypes = {
+const events = {
+    CHESSBOARD_SET_FEN         : null,  
+    CHESSBOARD_SET_ORIENTATION : null,
+    CHESSBOARD_SET_COORDINATES : null,  
+    CHESSBOARD_PIECE_MOVE      : null,         
+    CHESSBOARD_PIECE_PROMOTION : null,
+};
+
+for (let key in events) {
+    if (true) { events[key] = key }
+}
+
+export default events;
+
+export const itemTypes = {
     PIECE: 'piece',
 }
-exports.ItemTypes = ItemTypes;
 
-const SquaresWithCoordinates = {
+export const squaresWithCoordinates = {
     white: {
         'a1': 'b', 'a2': 'n', 'a3': 'n', 
         'a4': 'n', 'a5': 'n', 'a6': 'n', 
@@ -19,6 +32,4 @@ const SquaresWithCoordinates = {
         'b8': 'l', 'c8': 'l', 'd8': 'l',
         'e8': 'l', 'f8': 'l', 'g8': 'l',
     }
-
 }
-exports.SquaresWithCoordinates = SquaresWithCoordinates;

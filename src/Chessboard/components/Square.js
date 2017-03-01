@@ -4,9 +4,10 @@ import { connect }    from 'react-redux';
 import { Move }       from '../actions.js';
 import { Colors }     from '../utils/Defaults.js';
 import { 
-    ItemTypes,
-    SquaresWithCoordinates,
-} from '../utils/Constants.js';
+    itemTypes,
+    squaresWithCoordinates,
+} from '../constants.js';
+
 
 const Square = React.createClass({
     renderOverlay: function(shade) {
@@ -21,7 +22,7 @@ const Square = React.createClass({
 
         let letter = this.props.coordinate[0];
         let number = this.props.coordinate[1];
-        let corner = SquaresWithCoordinates[this.props.orientation][this.props.coordinate];
+        let corner = squaresWithCoordinates[this.props.orientation][this.props.coordinate];
 
         if (corner === 'n') {
             letter = '';
@@ -96,5 +97,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {Move})(
-    DropTarget(ItemTypes.PIECE, squareTarget, collect)(Square
+    DropTarget(itemTypes.PIECE, squareTarget, collect)(Square
 ));

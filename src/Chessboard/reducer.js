@@ -1,14 +1,14 @@
 import { fromJS } from 'immutable';
 import engine from './utils/engine.js';
-import * as events from './actions.js';
+import events from './constants.js';
 
 let init = fromJS({
-    coordinates: true,        // weather or not to show coordinates
-    orientation: 'white',     // orientation of the board from players perspective 
-    promotion  : false,        // will hold information on pieces to be promoted 
-    fen        : 'rnbqkbnr/pppppppP/8/8/8/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1',
+    coordinates: true,       // weather or not to show coordinates
+    orientation: 'white',    // orientation of the board from players perspective 
+    promotion  : null,       // will hold information on pieces to be promoted 
     draggable  : true,       // if pieces are draggable
     size       : 500,        // size of the board for both height and width
+    fen        : 'rnbqkbnr/pppppppP/8/8/8/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1',
 });
 
 function reducer(state=init, action) {
@@ -22,16 +22,16 @@ function reducer(state=init, action) {
             state = state.set('fen', engine.fen());
             return state.set('promotion', false);
 
-        case events.CHESSBOARD_SELECT_PROMOTION:
+        case events.CHESSBOARD_PIECE_PROMOTION:
             return state.set('promotion', action.directions);
 
-        case events.FLIP_ORIENTATION:
+        case events.CHESSBOARD_SET_ORIENTATION:
             return state.set('orientation', action.color);
 
-        case events.SHOW_COORDINATES:
+        case events.CHESSBOARD_SET_COORDINATES:
             return state.set('coordinates', action.state);
 
-        case events.SET_FEN:
+        case events.CHESSBOARD_SET_FEN:
             return state.set('fen', action.fen);
 
         default:

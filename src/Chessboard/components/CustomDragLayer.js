@@ -1,6 +1,6 @@
 import React         from 'react';
 import { DragLayer } from 'react-dnd';
-import { ItemTypes } from '../utils/Constants.js';
+import { itemTypes } from '../constants.js';
 
 
 function getItemStyles(props) {
@@ -25,7 +25,7 @@ const CustomDragLayer = React.createClass({
 
     renderItem: function(type, item) {
         switch (type) {
-            case ItemTypes.PIECE:
+            case itemTypes.PIECE:
                 let img = `pieces/chesspieces/modern/${item.type}.png`;
                 return (<img style={getItemStyles(this.props)} alt={item.type} src={img}/>);
             default:
