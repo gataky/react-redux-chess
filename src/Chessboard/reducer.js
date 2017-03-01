@@ -6,7 +6,7 @@ let init = fromJS({
     coordinates: true,        // weather or not to show coordinates
     orientation: 'white',     // orientation of the board from players perspective 
     promotion  : false,        // will hold information on pieces to be promoted 
-    fen        : 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+    fen        : 'rnbqkbnr/pppppppP/8/8/8/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1',
     draggable  : true,       // if pieces are draggable
     size       : 500,        // size of the board for both height and width
 });

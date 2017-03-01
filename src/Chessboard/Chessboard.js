@@ -40,7 +40,8 @@ const Chessboard = React.createClass({
                 <AnimateOnChange
                     baseClassName="chessboard-board-layout"
                     animationClassName={`chessboard-board-layout-fade-${direction}`}
-                    animate={!!this.props.promotion || this.pp}>
+                    animate={!!this.props.promotion || this.pp}
+                    forwards={true}>
                         <Board/>
                 </AnimateOnChange>
 
