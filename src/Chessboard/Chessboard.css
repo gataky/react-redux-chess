@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Ceviche+One|Changa+One');
+@import url('https://fonts.googleapis.com/css?family=Play:700');
 
 .chessboard-board-layout-fade-out{
     animation: chessboard-board-layout-keyframes-fade-out .5s ease-in 0s 1 normal forwards;
@@ -30,14 +30,16 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding: 2px 0 0 2px;
+    padding: 1px 0 0 1px;
+    font-family: 'Play';
 }
 
 .chessboard-coordinate-br{
     position: absolute;
     bottom: 0;
     right: 0;
-    padding: 0 2px 2px 0;
+    padding: 0 1px 0px 0;
+    font-family: 'Play';
 }
 
 .chessboard-square-layout {
