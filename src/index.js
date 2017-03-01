@@ -5,9 +5,9 @@ import {
     Provider 
 } from 'react-redux';
 
-import Chessboard   from './ChessBoard/Chessboard.js';
 import store        from './store.js'
-import * as actions from './ChessBoard/actions.js';
+import Chessboard   from './Chessboard/Chessboard.js';
+import * as actions from './Chessboard/actions.js';
 
 import './index.css';
 

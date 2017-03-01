@@ -8,7 +8,7 @@ import Immutable    from 'immutable';
 import thunk        from 'redux-thunk';
 import createLogger from 'redux-logger';
 //import DevTools     from './components/DevTools';
-import * as ChessboardReducers   from "./ChessBoard/reducer.js";
+import * as ChessboardReducers   from "./Chessboard/reducer.js";
 
 const rootReducer = combineReducers({
     Chessboard: ChessboardReducers.default,
