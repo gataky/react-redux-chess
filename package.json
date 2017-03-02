@@ -7,7 +7,7 @@
     "react-scripts": "0.9.0"
   },
   "dependencies": {
-    "chess.js": "git+https://github.com/jhlywa/chess.js.git",
+    "chess.js": "git+https://github.com/sir-wiggles/chess.js.git",
     "immutable": "^3.8.1",
     "react": "^15.4.2",
     "react-animate-on-change": "git+https://github.com/sir-wiggles/react-animate-on-change.git",

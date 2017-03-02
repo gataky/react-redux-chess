@@ -20,10 +20,20 @@ function reducer(state=init, action) {
 function _reducer(state, engine, action) {
     switch (action.type) {
 
-        case events.CHESSBOARD_PIECE_MOVE:
-            engine.move(action.move);
+        case events.CHESSBOARD_PIECE_MOVE_USER:
+            let result = engine.move(action.move);
             state = state.set('fen', engine.fen());
             return state.set('promotion', false);
+
+        case events.CHESSBOARD_MOVE_ANIMATION_START:
+            result = engine.move(action.move.to, {readonly: true});
+
+            let from = getPosition(document.getElementById('chessboard-' + result.from));
+            let to   = getPosition(document.getElementById('chessboard-' + result.to));
+
+            let y = from.top - to.top;
+            let x = from.left - to.left;
+            return state.set('animation', {x, y});
 
         case events.CHESSBOARD_PIECE_PROMOTION:
             return state.set('promotion', action.move);
@@ -44,3 +54,7 @@ function _reducer(state, engine, action) {
 }
 
 export default reducer;
+
+function getPosition(element) {
+    return {left: element.offsetLeft, top: element.offsetTop};
+}

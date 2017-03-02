@@ -18,6 +18,16 @@
     100% { opacity:  1 }
 }
 
+.test {
+    animation: chessboard-move-animation .3s ease-out 0s 1 normal forwards;
+}
+
+@keyframes chessboard-move-animation {
+    100% {
+        transform: translate(125px, -125px);
+    }
+}
+
 .chessboard-target-overlay {
     position: absolute;
     width: 100%;

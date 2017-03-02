@@ -8,6 +8,7 @@ const Piece = React.createClass({
 
     componentDidMount: function () {
         this.props.connectDragPreview(getEmptyImage());
+
     },
 
     render: function () {
@@ -52,6 +53,7 @@ function collect(connect, monitor) {
 function mapStateToProps(state) {
     return {
         draggable: state.Chessboard.get('draggable'),
+        animation: state.Chessboard.get('animation'),
         engine   : state.Chessboard.get('engine').toJS(),
     }
 }

@@ -40,7 +40,7 @@ const Board = React.createClass({
 
     renderSquare: function(index, coordinate, piece) {
         return (
-            <div style={{ height: '12.5%', width : '12.5%' }} key={index}>
+            <div id={`chessboard-${coordinate}`} style={{ height: '12.5%', width : '12.5%' }} key={index}>
                 <Square index={index} coordinate={coordinate} >
                     {piece ? this.renderPiece(coordinate, piece) : null}
                 </Square>

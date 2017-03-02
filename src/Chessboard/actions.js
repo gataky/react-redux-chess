@@ -13,11 +13,21 @@ import events from './constants.js';
 //      color     : <string> | values = b w
 //      promotion : <string> | values = r b n q
 //  api:
-//      move      : <string> | values = various forms of long algebraic notation h7xg8=r
+//      to        : <string> | values = various forms of long algebraic notation h7xg8=r
 // }
 
-function _move(move) {
-    return {type: events.CHESSBOARD_PIECE_MOVE, move};
+function _user_move(move) {
+    return {type: events.CHESSBOARD_PIECE_MOVE_USER, move};
+}
+
+function _api_move(move) {
+    return function(dispatch) {
+        dispatch(_move_animation_start(move));
+    }
+}
+
+function _move_animation_start(move) {
+    return {type: events.CHESSBOARD_MOVE_ANIMATION_START, move}
 }
 
 function _promotion(move) {
@@ -34,7 +44,7 @@ function _promotion(move) {
 export function Promote(move, promotion) {
     return function(dispatch) {
         move.promotion = promotion[1]; 
-        dispatch(_move(move));
+        dispatch(_user_move(move));
     }
 }
 
@@ -47,12 +57,26 @@ export function Promote(move, promotion) {
  */
 export function Move(move) {
     return function(dispatch){
+        // user action promotion
         if ( (move.method === 'user')                                         &&
             ((move.type === 'p' && move.color === 'w' && move.to[1] === '8')  ||
              (move.type === 'p' && move.color === 'b' && move.to[1] === '1'))) {
             dispatch(_promotion(move));
+        // normal move either user or api
         } else {
-            dispatch(_move(move));
+            if (move.method === 'user') {
+                dispatch(_user_move(move));
+            } else {
+                dispatch(_api_move(move));
+            }
+        }
+    }
+}
+
+export function Moves(moves) {
+    return function(dispatch) {
+        for (let i = 0; i < moves.length; i++) {
+            dispatch(_api_move(moves[i]));
         }
     }
 }
