@@ -3,7 +3,7 @@ import { DragSource }    from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { connect }       from 'react-redux';
 import { itemTypes }     from '../constants.js';
-import engine            from '../utils/engine.js';
+import engine from '../engine.js';
 
 const Piece = React.createClass({
 
@@ -39,6 +39,7 @@ function validMoves (coordinate) {
         verbose: true,
     });
     squares = squares.map(square => { return square.to });
+    console.log(squares);
     return squares;
 }
 

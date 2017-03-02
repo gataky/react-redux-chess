@@ -51,8 +51,10 @@ const Promotion = React.createClass({
             //boxShadow   : '3px 3px 10px grey',
         }
         return (
-                <div style={style}>
-                    {this.renderSquares()}
+                <div className="chessboard-promotion-layout">
+                    <div style={style}>
+                        {this.renderSquares()}
+                    </div>
                 </div>
         )
     }

@@ -2,24 +2,17 @@ import React       from 'react';
 import { connect } from 'react-redux';
 import Square      from './Square.js';
 import Piece       from './Piece.js';
-import engine      from '../utils/engine.js';
+
+import engine from '../engine.js';
 
 const Board = React.createClass({
-
-    getInitialState: function() {
-        let success = engine.load(this.props.fen);
-        if (!success) {
-            console.error(engine.validate(this.props.fen));
-        }
-        return {};
-    },
 
     renderSquares: function() {
         let squares = [];
         let piece, number, letter, board, coordinate, index;
 
-        engine.load(this.props.fen);
         board = engine.board();
+        console.log(engine.ascii())
 
         let o = this.props.orientation;
         for (
@@ -52,16 +45,15 @@ const Board = React.createClass({
         return (
             <div style={{ height: '12.5%', width : '12.5%' }} key={index}>
                 <Square index={index} coordinate={coordinate} >
-                    {this.renderPiece(coordinate, piece)}
+                    {piece ? this.renderPiece(coordinate, piece) : null}
                 </Square>
             </div>
         )
     },
 
     renderPiece: function(coordinate, piece) {
-        if (piece) {
-            return <Piece type={piece} coordinate={coordinate} draggable={true}/>;
-        }
+        let moves = engine.moves({square: coordinate});
+        return <Piece type={piece} coordinate={coordinate} moves={moves} draggable={true}/>;
     },
 
     render: function() {

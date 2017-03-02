@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import engine from './utils/engine.js';
+import engine from './engine.js';
 import events from './constants.js';
 
 let init = fromJS({
@@ -9,7 +9,7 @@ let init = fromJS({
     draggable  : true,       // if pieces are draggable
     size       : 500,        // size of the board for both height and width
     //fen        : 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-    fen        : 'rnbqkbn1/pppppppP/8/8/8/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1',
+    //fen        : 'rnbqkbn1/pppppppP/8/8/8/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1',
 });
 
 function reducer(state=init, action) {
