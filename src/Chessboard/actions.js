@@ -35,12 +35,12 @@ export function Move(move) {
     }
 }
 
-export function Orientation(color) {
-    return {type: events.CHESSBOARD_SET_ORIENTATION, color}
+export function Orientation(orientation) {
+    return {type: events.CHESSBOARD_SET_ORIENTATION, orientation}
 }
 
-export function Coordinates(state) {
-    return {type: events.CHESSBOARD_SET_COORDINATES, state}
+export function Coordinates(coordinates) {
+    return {type: events.CHESSBOARD_SET_COORDINATES, coordinates}
 }
 
 export function SetFEN(fen) {

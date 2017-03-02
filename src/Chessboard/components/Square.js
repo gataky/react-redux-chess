@@ -2,8 +2,8 @@ import React          from 'react';
 import { DropTarget } from 'react-dnd';
 import { connect }    from 'react-redux';
 import { Move }       from '../actions.js';
-import { Colors }     from '../utils/Defaults.js';
 import { 
+    colors,
     itemTypes,
     squaresWithCoordinates,
 } from '../constants.js';
@@ -11,7 +11,7 @@ import {
 
 const Square = React.createClass({
     renderOverlay: function(shade) {
-        let s = {background: Colors.Highlight[shade]};
+        let s = {background: colors.highlight[shade]};
         return <div className={"chessboard-target-overlay"} style={s}></div>;
     },
 
@@ -34,7 +34,7 @@ const Square = React.createClass({
             return 
         }
 
-        let s = {color: isBlackSquare ? Colors.Primary.light : Colors.Primary.dark};
+        let s = {color: isBlackSquare ? colors.primary.light : colors.primary.dark};
         return (
             <div>
                 {!!number ? <div className="chessboard-coordinate-ul" style={s}>{number}</div> : null }
@@ -49,7 +49,7 @@ const Square = React.createClass({
         let y = Math.floor(index / 8);
         let black = ( x + y ) % 2 === 1;
 
-        let s = {background: black ? Colors.Primary.dark  : Colors.Primary.light};
+        let s = {background: black ? colors.primary.dark  : colors.primary.light};
 
         if (this.props.draggable || true) {
 

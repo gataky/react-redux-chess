@@ -9,11 +9,10 @@ const events = {
 for (let key in events) {
     if (true) { events[key] = key }
 }
-
 export default events;
 
 export const itemTypes = {
-    PIECE: 'piece',
+    PIECE: 'PIECE',
 }
 
 export const squaresWithCoordinates = {
@@ -31,5 +30,16 @@ export const squaresWithCoordinates = {
         'h6': 'n', 'h7': 'n', 'a8': 'l',
         'b8': 'l', 'c8': 'l', 'd8': 'l',
         'e8': 'l', 'f8': 'l', 'g8': 'l',
+    }
+}
+
+export const colors = {
+    primary  : {
+        dark : 'rgba( 75, 115, 153, 1)',
+        light: 'rgba(234, 233, 210, 1)',
+    },
+    highlight: {
+        dark : 'rgba(183, 223, 251, 1)',
+        light: 'rgba(208, 228, 230, 1)',
     }
 }

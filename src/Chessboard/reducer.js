@@ -24,10 +24,10 @@ function reducer(state=init, action) {
             return state.set('promotion', action.move);
 
         case events.CHESSBOARD_SET_ORIENTATION:
-            return state.set('orientation', action.color);
+            return state.set('orientation', action.orientation);
 
         case events.CHESSBOARD_SET_COORDINATES:
-            return state.set('coordinates', action.state);
+            return state.set('coordinates', action.coordinates);
 
         case events.CHESSBOARD_SET_FEN:
             return state.set('fen', action.fen);

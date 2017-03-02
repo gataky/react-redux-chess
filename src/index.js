@@ -3,7 +3,7 @@ import ReactDOM     from 'react-dom';
 import { 
     connect, 
     Provider 
-} from 'react-redux';
+}                   from 'react-redux';
 
 import store        from './store.js'
 import Chessboard   from './Chessboard/Chessboard.js';
@@ -14,8 +14,7 @@ import './index.css';
 const Controls = connect(mapStateToProps, actions)(React.createClass({
 
     flip: function() {
-        let color = {white: 'black', black: 'white'}[this.props.orientation];
-        this.props.Orientation(color);
+        this.props.Orientation(!this.props.orientation);
     },
 
     coordinates: function() {

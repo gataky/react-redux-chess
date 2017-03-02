@@ -9,7 +9,7 @@ import Board           from './components/Board.js';
 import CustomDragLayer from './components/CustomDragLayer.js';
 import Promotion       from './components/Promotion.js';
 
-import './Chessboard.css';
+import './stylesheet.css';
 
 const Chessboard = React.createClass({
     getInitialState: function() {
