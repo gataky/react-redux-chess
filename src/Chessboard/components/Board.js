@@ -3,16 +3,13 @@ import { connect } from 'react-redux';
 import Square      from './Square.js';
 import Piece       from './Piece.js';
 
-import engine from '../engine.js';
-
 const Board = React.createClass({
 
     renderSquares: function() {
         let squares = [];
         let piece, number, letter, board, coordinate, index;
 
-        board = engine.board();
-        console.log(engine.ascii())
+        board = this.props.engine.board();
 
         let o = this.props.orientation;
         for (
@@ -52,8 +49,8 @@ const Board = React.createClass({
     },
 
     renderPiece: function(coordinate, piece) {
-        let moves = engine.moves({square: coordinate});
-        return <Piece type={piece} coordinate={coordinate} moves={moves} draggable={true}/>;
+        let moves = this.props.engine.moves({square: coordinate});
+        return <Piece type={piece} coordinate={coordinate} moves={moves}/>;
     },
 
     render: function() {
@@ -72,6 +69,7 @@ function mapStateToProps(state) {
         orientation: state.Chessboard.get('orientation'),
         promotion  : state.Chessboard.get('promotion'),
         fen        : state.Chessboard.get('fen'),
+        engine     : state.Chessboard.get('engine').toJS(),
     };
 }
 

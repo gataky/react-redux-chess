@@ -4,7 +4,6 @@ import { DragDropContext }     from 'react-dnd';
 import HTML5Backend            from 'react-dnd-html5-backend';
 import TouchBackend            from 'react-dnd-touch-backend';
 import { connect }             from 'react-redux';
-import Chess                   from 'chess.js';
 
 import Board           from './components/Board.js';
 import CustomDragLayer from './components/CustomDragLayer.js';

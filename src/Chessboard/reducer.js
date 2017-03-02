@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
-import engine from './engine.js';
 import events from './constants.js';
+import Chess from 'chess.js';
 
 let init = fromJS({
     coordinates: true,       // weather or not to show coordinates
@@ -10,32 +10,40 @@ let init = fromJS({
     size       : 500,        // size of the board for both height and width
     //fen        : 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
     //fen        : 'rnbqkbn1/pppppppP/8/8/8/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1',
+    engine     : new Chess(),
 });
 
 function reducer(state=init, action) {
+    let engine = state.get('engine').toJS()
     switch (action.type) {
 
         case events.CHESSBOARD_PIECE_MOVE:
             engine.move(action.move);
             state = state.set('fen', engine.fen());
-            return state.set('promotion', false);
+            state = state.set('promotion', false);
+            break;
 
         case events.CHESSBOARD_PIECE_PROMOTION:
-            return state.set('promotion', action.move);
+            state = state.set('promotion', action.move);
+            break;
 
         case events.CHESSBOARD_SET_ORIENTATION:
-            return state.set('orientation', action.orientation);
+            state = state.set('orientation', action.orientation);
+            break;
 
         case events.CHESSBOARD_SET_COORDINATES:
-            return state.set('coordinates', action.coordinates);
+            state = state.set('coordinates', action.coordinates);
+            break
 
         case events.CHESSBOARD_SET_FEN:
-            return state.set('fen', action.fen);
+            engine.load(action.fen);
+            state = state.set('fen', action.fen);
+            break;
 
         default:
             break;
     }
-    return state;
+    return state.set('engine', fromJS(engine));
 }
 
 export default reducer;

@@ -3,7 +3,6 @@ import { DragSource }    from 'react-dnd';
 import { getEmptyImage } from 'react-dnd-html5-backend';
 import { connect }       from 'react-redux';
 import { itemTypes }     from '../constants.js';
-import engine from '../engine.js';
 
 const Piece = React.createClass({
 
@@ -24,22 +23,22 @@ const pieceSource = {
     canDrag(props) {
         return props.draggable;
     },
-    beginDrag(props) {
+    beginDrag(props, source, connect) {
+        console.log('pieceSource', props);
         return {
             coordinate: props.coordinate,
             type      : props.type,
-            moves     : validMoves(props.coordinate),
+            moves     : validMoves(props),
         };
     },
 }
 
-function validMoves (coordinate) {
-    let squares = engine.moves({
-        square : coordinate,
+function validMoves (props) {
+    let squares = props.engine.moves({
+        square : props.coordinate,
         verbose: true,
     });
     squares = squares.map(square => { return square.to });
-    console.log(squares);
     return squares;
 }
 
@@ -54,9 +53,10 @@ function collect(connect, monitor) {
 function mapStateToProps(state) {
     return {
         draggable: state.Chessboard.get('draggable'),
+        engine   : state.Chessboard.get('engine').toJS(),
     }
 }
 
-export default DragSource(itemTypes.PIECE, pieceSource, collect)(
-    connect(mapStateToProps)(Piece)
+export default connect(mapStateToProps)(
+        DragSource(itemTypes.PIECE, pieceSource, collect)(Piece)
 );
