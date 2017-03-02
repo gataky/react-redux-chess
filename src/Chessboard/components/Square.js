@@ -78,7 +78,14 @@ const squareTarget = {
 
     drop(props, monitor) {
         let piece = monitor.getItem();
-        props.Move({piece, to: props.coordinate});
+        let move = {
+            from  : piece.coordinate,
+            to    : props.coordinate,
+            type  : piece.type[1],
+            color : piece.type[0],
+            method: 'user',
+        }
+        props.Move(move);
     },
 };
 

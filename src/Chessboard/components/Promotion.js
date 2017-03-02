@@ -7,10 +7,11 @@ import {Promote}   from '../actions.js';
 const Promotion = React.createClass({
 
     renderSquares: function() {
-        if (this.props.promotion === false) {
+        if (!!!this.props.promotion) {
             return null;
         }
-        let color = this.props.promotion.piece.type[0]
+        let color = this.props.promotion.color;
+
         let squares = [];
         for (let i = 0; i < 5; i++) {
             if (i === 2) continue;

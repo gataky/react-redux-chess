@@ -1,32 +1,36 @@
 import events from './constants.js';
 
-function MovePiece(directions) {
-    return {type: events.CHESSBOARD_PIECE_MOVE, directions};
+function MovePiece(move) {
+    return {type: events.CHESSBOARD_PIECE_MOVE, move};
 }
 
-function SelectPromotion(directions) {
-    return {type: events.CHESSBOARD_PIECE_PROMOTION, directions};    
+function SelectPromotion(move) {
+    return {type: events.CHESSBOARD_PIECE_PROMOTION, move};    
 }
 
-export function Promote(directions, promotion) {
+export function Promote(move, promotion) {
     return function(dispatch) {
-        directions.promotion = promotion[1]; 
-        dispatch(MovePiece(directions));
+        move.promotion = promotion[1]; 
+        dispatch(MovePiece(move));
     }
 }
 
-export function Move(directions) {
+// move = {
+//      from      : <string> | values = a1 ... h8
+//      to        : <string> | values = a1 ... h8
+//      type      : <string> | values = r b n k q p
+//      color     : <string> | values = b w
+//      promotion : <string> | values = r b n q
+//      method    : <string> | values = user api
+// }
+export function Move(move) {
     return function(dispatch){
-
-        let piece = directions.piece.type[1];
-        let color = directions.piece.type[0];
-        let rank  = directions.to[1];
-
-        if ((piece === 'p' && color === 'w' && rank === '8') ||
-            (piece === 'p' && color === 'b' && rank === '1')) {
-            dispatch(SelectPromotion(directions));
+        if (((move.type === 'p' && move.color === 'w' && move.to[1] === '8')  ||
+             (move.type === 'p' && move.color === 'b' && move.to[1] === '1')) &&
+             (move.method === "user")) {
+            dispatch(SelectPromotion(move));
         } else {
-            dispatch(MovePiece(directions));
+            dispatch(MovePiece(move));
         }
     }
 }
