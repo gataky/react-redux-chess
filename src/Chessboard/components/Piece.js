@@ -24,7 +24,6 @@ const pieceSource = {
         return props.draggable;
     },
     beginDrag(props, source, connect) {
-        console.log('pieceSource', props);
         return {
             coordinate: props.coordinate,
             type      : props.type,

@@ -1,48 +1,81 @@
 import events from './constants.js';
 
-function MovePiece(move) {
-    return {type: events.CHESSBOARD_PIECE_MOVE, move};
-}
-
-function SelectPromotion(move) {
-    return {type: events.CHESSBOARD_PIECE_PROMOTION, move};    
-}
-
-export function Promote(move, promotion) {
-    return function(dispatch) {
-        move.promotion = promotion[1]; 
-        dispatch(MovePiece(move));
-    }
-}
-
+// Below is the structure of how to issue a move command on the board.
+// There are two ways in which a piece can be moved: by the user, or by 
+// some api.  This move action has all the information needed to update
+// the state of the engine.
 // move = {
+//      method    : <string> | values = user api
+//  user:
 //      from      : <string> | values = a1 ... h8
 //      to        : <string> | values = a1 ... h8
 //      type      : <string> | values = r b n k q p
 //      color     : <string> | values = b w
 //      promotion : <string> | values = r b n q
-//      method    : <string> | values = user api
+//  api:
+//      move      : <string> | values = various forms of long algebraic notation h7xg8=r
 // }
+
+function _move(move) {
+    return {type: events.CHESSBOARD_PIECE_MOVE, move};
+}
+
+function _promotion(move) {
+    return {type: events.CHESSBOARD_PIECE_PROMOTION, move};    
+}
+
+/* Promote
+ * Promotes a move from 7th to 8th for white or 2nd to 1st for black
+ * to the promotion piece selected by the user. This method is only valid
+ * for pawn promotions as there are no other types of promotion allowed in
+ * chess.  If you try and promote a non pawn piece, or a pawn piece on the 
+ * wrong rank then the engine will refuse to set the new position.
+ */
+export function Promote(move, promotion) {
+    return function(dispatch) {
+        move.promotion = promotion[1]; 
+        dispatch(_move(move));
+    }
+}
+
+/* Move
+ * Moves a piece on the board.  If the method of move was user then will check
+ * for promotion ability.  If it's determined that it's a promotion move then 
+ * we'll dispatch the select promotion action to allow the user to select the 
+ * promotion type.  If the move was made by an api then the move should have
+ * all the information needed to handle any promotion and no dialog will appear.
+ */
 export function Move(move) {
     return function(dispatch){
-        if (((move.type === 'p' && move.color === 'w' && move.to[1] === '8')  ||
-             (move.type === 'p' && move.color === 'b' && move.to[1] === '1')) &&
-             (move.method === "user")) {
-            dispatch(SelectPromotion(move));
+        if ( (move.method === 'user')                                         &&
+            ((move.type === 'p' && move.color === 'w' && move.to[1] === '8')  ||
+             (move.type === 'p' && move.color === 'b' && move.to[1] === '1'))) {
+            dispatch(_promotion(move));
         } else {
-            dispatch(MovePiece(move));
+            dispatch(_move(move));
         }
     }
 }
 
+/* Orientation
+ * Sets the orientation of the board with white being the true orientation and 
+ * black being false.
+ */
 export function Orientation(orientation) {
     return {type: events.CHESSBOARD_SET_ORIENTATION, orientation}
 }
 
+/* Coordinates 
+ * Display the coordinates on the left most file and bottom rand if true otherwise
+ * don't display coordinates.
+ */
 export function Coordinates(coordinates) {
     return {type: events.CHESSBOARD_SET_COORDINATES, coordinates}
 }
 
+/* SetFEN
+ * Sets a fully qualified fen, must have all fields for engine to accept
+ */
 export function SetFEN(fen) {
     return {type: events.CHESSBOARD_SET_FEN, fen};
 }

@@ -8,42 +8,39 @@ let init = fromJS({
     promotion  : null,       // will hold information on pieces to be promoted 
     draggable  : true,       // if pieces are draggable
     size       : 500,        // size of the board for both height and width
-    //fen        : 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-    //fen        : 'rnbqkbn1/pppppppP/8/8/8/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1',
-    engine     : new Chess(),
+    engine     : new Chess(),// engine handles all the logic
 });
 
 function reducer(state=init, action) {
     let engine = state.get('engine').toJS()
+    state = _reducer(state, engine, action);
+    return state.set('engine', fromJS(engine));
+}
+
+function _reducer(state, engine, action) {
     switch (action.type) {
 
         case events.CHESSBOARD_PIECE_MOVE:
             engine.move(action.move);
             state = state.set('fen', engine.fen());
-            state = state.set('promotion', false);
-            break;
+            return state.set('promotion', false);
 
         case events.CHESSBOARD_PIECE_PROMOTION:
-            state = state.set('promotion', action.move);
-            break;
+            return state.set('promotion', action.move);
 
         case events.CHESSBOARD_SET_ORIENTATION:
-            state = state.set('orientation', action.orientation);
-            break;
+            return state.set('orientation', action.orientation);
 
         case events.CHESSBOARD_SET_COORDINATES:
-            state = state.set('coordinates', action.coordinates);
-            break
+            return state.set('coordinates', action.coordinates);
 
         case events.CHESSBOARD_SET_FEN:
             engine.load(action.fen);
-            state = state.set('fen', action.fen);
-            break;
+            return state.set('fen', action.fen);
 
         default:
-            break;
+            return state;
     }
-    return state.set('engine', fromJS(engine));
 }
 
 export default reducer;
