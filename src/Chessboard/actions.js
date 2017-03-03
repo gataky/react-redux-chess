@@ -85,6 +85,10 @@ export function Moves(moves) {
     }
 }
 
+export function Undo() {
+    return {type: events.CHESSBOARD_MOVE_UNDO};
+}
+
 /* Orientation
  * Sets the orientation of the board with white being the true orientation and 
  * black being false.

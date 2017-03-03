@@ -28,12 +28,11 @@ const Piece = React.createClass({
             }`;
         style.innerHTML = keyFrames;
         let test = document.getElementById('chessboard');
-        console.log(test, style);
         test.appendChild(style);
         this.interval = setInterval((that) => {
             that.props._move_animation_stop(that.props.animation.move);
             clearInterval(that.interval);
-        }, 333, this)
+        }, 150, this)
         return true;
     },
 

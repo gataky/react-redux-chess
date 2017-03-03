@@ -16,6 +16,7 @@ function reducer(state=init, action) {
     state = _reducer(state, engine, action);
     return state.set('engine', fromJS(engine));
 }
+export default reducer;
 
 function _reducer(state, engine, action) {
     switch (action.type) {
@@ -52,12 +53,15 @@ function _reducer(state, engine, action) {
             engine.load(action.fen);
             return state.set('fen', action.fen);
 
+        case events.CHESSBOARD_MOVE_UNDO:
+            engine.undo();
+            return state.set('fen', engine.fen());
+
         default:
             return state;
     }
 }
 
-export default reducer;
 
 function getPosition(element) {
     return {left: element.offsetLeft, top: element.offsetTop};

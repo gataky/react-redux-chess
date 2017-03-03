@@ -5,6 +5,7 @@ const events = {
     CHESSBOARD_PIECE_MOVE_USER : null,         
     CHESSBOARD_PIECE_MOVE_API  : null,         
     CHESSBOARD_PIECE_PROMOTION : null,
+    CHESSBOARD_MOVE_UNDO       : null,
 
     CHESSBOARD_MOVE_ANIMATION_START : null,
     CHESSBOARD_MOVE_ANIMATION_STOP  : null,
