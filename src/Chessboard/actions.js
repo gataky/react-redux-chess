@@ -27,7 +27,11 @@ function _api_move(move) {
 }
 
 function _move_animation_start(move) {
-    return {type: events.CHESSBOARD_MOVE_ANIMATION_START, move}
+    return {type: events.CHESSBOARD_MOVE_ANIMATION_START, move};
+}
+
+export function _move_animation_stop(move) {
+    return {type: events.CHESSBOARD_MOVE_ANIMATION_STOP, move};
 }
 
 function _promotion(move) {

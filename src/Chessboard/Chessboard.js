@@ -35,7 +35,7 @@ const Chessboard = React.createClass({
         } 
         
         return (
-            <div className="chessboard" style={style}>
+            <div id="chessboard" className="chessboard" style={style}>
                 <AnimateOnChange
                     baseClassName="chessboard-board-layout"
                     animationClassName={`chessboard-board-layout-fade-${direction}`}

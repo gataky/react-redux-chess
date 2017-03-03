@@ -31,9 +31,13 @@ function _reducer(state, engine, action) {
             let from = getPosition(document.getElementById('chessboard-' + result.from));
             let to   = getPosition(document.getElementById('chessboard-' + result.to));
 
-            let y = from.top - to.top;
-            let x = from.left - to.left;
-            return state.set('animation', {x, y});
+            let y = to.top  - from.top;
+            let x = to.left - from.left;
+            return state.set('animation', {from: result.from, x, y, move: action.move});
+
+        case events.CHESSBOARD_MOVE_ANIMATION_STOP:
+            result = engine.move(action.move.to, {sloppy: true});
+            return state.set('animation', null);
 
         case events.CHESSBOARD_PIECE_PROMOTION:
             return state.set('promotion', action.move);
