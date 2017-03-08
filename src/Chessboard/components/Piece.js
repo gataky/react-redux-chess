@@ -8,13 +8,16 @@ import * as actions      from '../actions';
 const Piece = React.createClass({
 
     animate: function() {
-        var style = document.createElement('style');
-        style.type = 'text/css';
         if (this.props.coordinate !== this.props.animation.from){
             return false;
         }
+
+        var style = document.createElement('style');
+        style.type = 'text/css';
+
         let x = this.props.animation.x;
         let y = this.props.animation.y;
+
         var keyFrames = `
             @-webkit-keyframes chessboard-animate-move {
                 100% {
@@ -26,13 +29,21 @@ const Piece = React.createClass({
                     -webkit-transform: translate(${x}px, ${y}px);
                 }
             }`;
+
         style.innerHTML = keyFrames;
-        let test = document.getElementById('chessboard');
-        test.appendChild(style);
+        let board = document.getElementById('chessboard');
+
+        if (board.children.length > 1) {
+            board.replaceChild(style, board.children[1]);
+        } else {
+            board.appendChild(style);
+        }
+
         this.interval = setInterval((that) => {
             that.props._move_animation_stop(that.props.animation.move);
             clearInterval(that.interval);
         }, 150, this)
+
         return true;
     },
 
@@ -41,13 +52,13 @@ const Piece = React.createClass({
     },
 
     render: function () {
-        this.img = `pieces/chesspieces/modern/${this.props.type}.png`;
+        this.img = `pieces/regular/${this.props.type}.svg`;
         let s = {opacity: this.props.isDragging ? 0.1 : 1 };
         let animate= this.props.animation ? this.animate() : null;
         return this.props.connectDragSource(
            <img 
                id={'chessboard-piece-' + this.props.coordinate} 
-               className={'chessboard-piece-layout' + (animate ? ' test' : '')}
+               className={'chessboard-piece-layout' + (animate ? ' chessboard-move-animation' : '')}
                style={s} 
                alt='piece' 
                src={this.img} 
