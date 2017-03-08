@@ -18,6 +18,8 @@ function getItemStyles(props) {
         zIndex: 2,
         transform,
         WebkitTransform: transform,
+        height: '62px',
+        width:  '62px',
     };
 }
 
@@ -26,7 +28,7 @@ const CustomDragLayer = React.createClass({
     renderItem: function(type, item) {
         switch (type) {
             case itemTypes.PIECE:
-                let img = `pieces/chesspieces/modern/${item.type}.png`;
+                let img = `pieces/regular/${item.type}.svg`;
                 return (<img style={getItemStyles(this.props)} alt={item.type} src={img}/>);
             default:
                 return null;
