@@ -67,6 +67,10 @@ export function Moves(moves) {
     }
 }
 
+export function Selected(square) {
+    return {type: events.CHESSBOARD_PIECE_SELECTED, square};
+}
+
 /* Orientation
  * Sets the orientation of the board with white being the true orientation and 
  * black being false.

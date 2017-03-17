@@ -4,6 +4,7 @@ const events = {
     CHESSBOARD_SET_COORDINATES : null,  
 
     CHESSBOARD_PIECE_MOVE      : null,         
+    CHESSBOARD_PIECE_SELECTED  : null,         
     CHESSBOARD_PIECE_PROMOTION : null,
 };
 

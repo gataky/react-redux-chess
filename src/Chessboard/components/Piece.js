@@ -21,6 +21,7 @@ const Piece = React.createClass({
                style={s} 
                alt='piece' 
                src={this.img} 
+               onClick={() => {this.props.Selected(this.props.coordinate)}}
             />
         )
     }

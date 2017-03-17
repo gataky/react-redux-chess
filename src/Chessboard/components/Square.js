@@ -11,6 +11,11 @@ import {
 
 const Square = React.createClass({
     renderOverlay: function(shade) {
+        let moves = this.props.squares ? this.props.squares.moves : []
+        if (!(this.props.canDrop || (moves.find(e => { return  this.props.coordinate === e.to})))) {
+            return null;
+        }
+
         let s = {background: colors.highlight[shade]};
         return <div className={"chessboard-target-overlay"} style={s}></div>;
     },
@@ -46,6 +51,18 @@ const Square = React.createClass({
         )
     },
 
+    handleSelection: function(coordinate) {
+        if (!(this.props.squares)) {
+            return
+        }
+
+        this.props.Move({
+            method: 'user',
+            from: this.props.squares.source,
+            to: coordinate,
+        })
+    },
+
     render: function() {
         let index = this.props.index;
         let x = index % 8;
@@ -57,9 +74,10 @@ const Square = React.createClass({
         if (this.props.draggable || true) {
 
             return this.props.connectDropTarget(
-                <div className="chessboard-square-layout" style={s}>
+                <div className="chessboard-square-layout" style={s}
+                onClick={() => {this.handleSelection(this.props.coordinate)}}>
                     {this.props.children}
-                    {this.props.canDrop && this.renderOverlay(black ? 'dark' : 'light')}
+                    {this.renderOverlay(black ? 'dark' : 'light')}
                     {this.props.coordinates ? this.renderCoordinate(black) : null}
                 </div>
             );
@@ -102,10 +120,11 @@ function collect(connect, monitor) {
 
 function mapStateToProps(state) {
     return {
-        coordinates: state.Chessboard.get("coordinates"),
-        orientation: state.Chessboard.get("orientation"),
-        promotion  : state.Chessboard.get('promotion'),
-        size       : state.Chessboard.get('size'),
+        coordinates : state.Chessboard.get("coordinates"),
+        orientation : state.Chessboard.get("orientation"),
+        promotion   : state.Chessboard.get('promotion'),
+        size        : state.Chessboard.get('size'),
+        squares     : state.Chessboard.get('squares'),
     }
 }
 
