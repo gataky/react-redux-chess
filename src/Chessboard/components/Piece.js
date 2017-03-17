@@ -21,7 +21,15 @@ const Piece = React.createClass({
                style={s} 
                alt='piece' 
                src={this.img} 
-               onClick={() => {this.props.Selected(this.props.coordinate)}}
+               onClick={() => {
+                       this.props.Select({
+                           source: this.props.coordinate, 
+                           moves : validMoves(this.props),
+                           type  : this.props.type[1],
+                           color : this.props.type[0],
+                       })
+                   }
+               }
             />
         )
     }
@@ -41,12 +49,10 @@ const pieceSource = {
 }
 
 function validMoves (props) {
-    let squares = props.engine.moves({
+    return props.engine.moves({
         square : props.coordinate,
         verbose: true,
     });
-    squares = squares.map(square => { return square.to });
-    return squares;
 }
 
 function collect(connect, monitor) {

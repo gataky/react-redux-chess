@@ -67,8 +67,12 @@ export function Moves(moves) {
     }
 }
 
-export function Selected(square) {
-    return {type: events.CHESSBOARD_PIECE_SELECTED, square};
+/* Select
+ * Select allows a piece to be selected by clicking on it.  Useful for when not dragging.
+ * Valid squares will be highlighted.
+ */
+export function Select(selection) {
+    return {type: events.CHESSBOARD_PIECE_SELECTED, selection};
 }
 
 /* Orientation
