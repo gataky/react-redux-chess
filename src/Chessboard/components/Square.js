@@ -34,7 +34,10 @@ const Square = React.createClass({
             return 
         }
 
-        let s = {color: isBlackSquare ? colors.primary.light : colors.primary.dark};
+        let s = {
+            color   : isBlackSquare ? colors.primary.light : colors.primary.dark,
+            fontSize: (this.props.size * .30 * .125) + 'px',
+        };
         return (
             <div>
                 {!!number ? <div className="chessboard-coordinate-ul" style={s}>{number}</div> : null }
@@ -102,6 +105,7 @@ function mapStateToProps(state) {
         coordinates: state.Chessboard.get("coordinates"),
         orientation: state.Chessboard.get("orientation"),
         promotion  : state.Chessboard.get('promotion'),
+        size       : state.Chessboard.get('size'),
     }
 }
 

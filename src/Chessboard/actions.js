@@ -16,22 +16,8 @@ import events from './constants.js';
 //      to        : <string> | values = various forms of long algebraic notation h7xg8=r
 // }
 
-function _user_move(move) {
-    return {type: events.CHESSBOARD_PIECE_MOVE_USER, move};
-}
-
-function _api_move(move) {
-    return function(dispatch) {
-        dispatch(_move_animation_start(move));
-    }
-}
-
-function _move_animation_start(move) {
-    return {type: events.CHESSBOARD_MOVE_ANIMATION_START, move};
-}
-
-export function _move_animation_stop(move) {
-    return {type: events.CHESSBOARD_MOVE_ANIMATION_STOP, move};
+function _move(move) {
+    return {type: events.CHESSBOARD_PIECE_MOVE, move};
 }
 
 function _promotion(move) {
@@ -48,7 +34,7 @@ function _promotion(move) {
 export function Promote(move, promotion) {
     return function(dispatch) {
         move.promotion = promotion[1]; 
-        dispatch(_user_move(move));
+        dispatch(_move(move));
     }
 }
 
@@ -68,11 +54,7 @@ export function Move(move) {
             dispatch(_promotion(move));
         // normal move either user or api
         } else {
-            if (move.method === 'user') {
-                dispatch(_user_move(move));
-            } else {
-                dispatch(_api_move(move));
-            }
+            dispatch(_move(move));
         }
     }
 }
@@ -80,13 +62,9 @@ export function Move(move) {
 export function Moves(moves) {
     return function(dispatch) {
         for (let i = 0; i < moves.length; i++) {
-            dispatch(_api_move(moves[i]));
+            dispatch(_move(moves[i]));
         }
     }
-}
-
-export function Undo() {
-    return {type: events.CHESSBOARD_MOVE_UNDO};
 }
 
 /* Orientation

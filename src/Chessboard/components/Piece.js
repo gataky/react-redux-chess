@@ -7,46 +7,6 @@ import * as actions      from '../actions';
 
 const Piece = React.createClass({
 
-    animate: function() {
-        if (this.props.coordinate !== this.props.animation.from){
-            return false;
-        }
-
-        var style = document.createElement('style');
-        style.type = 'text/css';
-
-        let x = this.props.animation.x;
-        let y = this.props.animation.y;
-
-        var keyFrames = `
-            @-webkit-keyframes chessboard-animate-move {
-                100% {
-                    -webkit-transform: translate(${x}px, ${y}px);
-                }
-            }
-            @-moz-keyframes chessboard-animate-move {
-                100% {
-                    -webkit-transform: translate(${x}px, ${y}px);
-                }
-            }`;
-
-        style.innerHTML = keyFrames;
-        let board = document.getElementById('chessboard');
-
-        if (board.children.length > 1) {
-            board.replaceChild(style, board.children[1]);
-        } else {
-            board.appendChild(style);
-        }
-
-        this.interval = setInterval((that) => {
-            that.props._move_animation_stop(that.props.animation.move);
-            clearInterval(that.interval);
-        }, 150, this)
-
-        return true;
-    },
-
     componentDidMount: function () {
         this.props.connectDragPreview(getEmptyImage());
     },
@@ -54,11 +14,10 @@ const Piece = React.createClass({
     render: function () {
         this.img = `pieces/regular/${this.props.type}.svg`;
         let s = {opacity: this.props.isDragging ? 0.1 : 1 };
-        let animate= this.props.animation ? this.animate() : null;
         return this.props.connectDragSource(
            <img 
                id={'chessboard-piece-' + this.props.coordinate} 
-               className={'chessboard-piece-layout' + (animate ? ' chessboard-move-animation' : '')}
+               className='chessboard-piece-layout' 
                style={s} 
                alt='piece' 
                src={this.img} 

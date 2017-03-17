@@ -2,7 +2,7 @@ import React       from 'react';
 import { connect } from 'react-redux';
 import Square      from './Square.js';
 import Piece       from './Piece.js';
-import {Promote}   from '../actions.js';
+import { Promote } from '../actions.js';
 
 const Promotion = React.createClass({
 
@@ -39,16 +39,16 @@ const Promotion = React.createClass({
     },
 
     render: function() {
+        let size = (this.props.size * .125 * 2) + 'px';
         let style = {
             display     : 'flex',
             flexWrap    : 'wrap',
             position    : 'relative',
             margin      : '0 auto',
-            height      : '125px',
-            width       : '125px',
+            height      : size,
+            width       : size,
             border      : '8px solid black',
             borderRadius: '5px',
-            //boxShadow   : '3px 3px 10px grey',
         }
         return (
                 <div className="chessboard-promotion-layout">
@@ -63,6 +63,7 @@ const Promotion = React.createClass({
 function mapStateToProps(state) {
     return {
         promotion: state.Chessboard.get('promotion'),
+        size     : state.Chessboard.get('size'),
     }
 }
 

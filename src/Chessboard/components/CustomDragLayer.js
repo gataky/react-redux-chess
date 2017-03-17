@@ -1,5 +1,6 @@
 import React         from 'react';
 import { DragLayer } from 'react-dnd';
+import { connect }   from 'react-redux';
 import { itemTypes } from '../constants.js';
 
 
@@ -13,13 +14,14 @@ function getItemStyles(props) {
     let { x, y } = currentOffset;
 
     const transform = `translate(${x}px, ${y}px)`;
+    let d = props.size * .15
     return {
         position: 'absolute',
         zIndex: 2,
         transform,
         WebkitTransform: transform,
-        height: '62px',
-        width:  '62px',
+        height: d + 'px',
+        width:  d + 'px',
     };
 }
 
@@ -57,4 +59,11 @@ function collect(monitor) {
         isDragging   : monitor.isDragging(),
     }
 }
-export default DragLayer(collect)(CustomDragLayer);
+
+function mapStateToProps(state) {
+    return {
+        size: state.Chessboard.get("size"),
+    }
+}
+
+export default connect(mapStateToProps)(DragLayer(collect)(CustomDragLayer));
